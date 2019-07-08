@@ -25,10 +25,52 @@ export default class TSYPay {
     constructor(AID: number, Name: string, Secret: string) {
         this.AID = AID; this.Name = Name; this.Secret = Secret;
     }
-    async create() { }
-    async refund() { }
-    async query() { }
+    /**
+     * 创建订单
+     * @param Title 
+     * @param TradeID 
+     * @param Money 
+     * @param Content 
+     * @param Channel 
+     */
+    async create(Title, TradeID, Money, Content, Channel = '') {
+        let pay = await req.post(this.Gateway + 'Pay/create', {
+            Channel,
+            Money,
+            AID: this.AID,
+            Title,
+            Content,
+            TradeID
+        });
+        return pay;
+    }
+    /**
+     * 退款
+     * @param TradeID 交易号
+     * @param Money 金额
+     * @param Reason 原因
+     */
+    async refund(TradeID, Money, Reason) {
+        let T = Date.now();
+        let Sign = MD5.encode([this.AID, T, TradeID, Money, Reason, this.Secret].join(''))
+        return await req.post(this.Gateway + 'Pay/refund', { TradeID, Money, Reason, T, Sign, AID: this.AID });
+    }
+    /**
+     * 
+     * @param TradeID 
+     */
+    async query(TradeID: string) {
+        return await req.post(this.Gateway + 'Pay/query', { TradeID, AID: this.AID });
+    }
     async getPayURL() { }
+    /**
+     * 
+     * @param TradeID 
+     * @param To 
+     * @param Money 
+     * @param Reason 
+     * @param Name 
+     */
     async transfer(TradeID: string | number, To: string, Money: number, Reason: string, Name?: string) {
         let t = Date.now();
         let rs = await req.post(this.Gateway + 'Pay/transfer', { TradeID, AID: this.AID, T: t, To, Money, Name, Reason, Sign: MD5.encode([this.AID, t, TradeID.toString(), Money, To, Reason, this.Secret].join('')) })
