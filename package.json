@@ -1,11 +1,14 @@
 {
   "name": "@ctsy/pay-server-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "repository": "https://github.com/c-tsy/pay-server-sdk.git",
   "author": "castleiMac <castle@tansuyun.cn>",
   "license": "MIT",
   "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "tsc"
+  },
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts",
@@ -13,10 +16,10 @@
     "yarn.lock"
   ],
   "devDependencies": {
-    "@types/node": "^12.0.12"
+    "@types/node": "^12.0"
   },
   "dependencies": {
-    "@ctsy/crypto": "^1.0.5",
-    "axios": "^0.19.0"
+    "@ctsy/crypto": "^1.0",
+    "axios": "^0.19"
   }
 }

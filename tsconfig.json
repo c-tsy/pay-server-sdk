@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2018",
+        "target": "esnext",
         "sourceMap": true,
         "outDir": "dist",
         "declaration": true,
         "experimentalDecorators": true,
-        "removeComments": true,
+        "removeComments": false,
         "preserveConstEnums": true,
         "resolveJsonModule": true
     },
