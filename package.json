@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "@ctsy/crypto": "^1.0",
-    "axios": "^0.19"
+    "axios": "^0.21"
   }
 }
